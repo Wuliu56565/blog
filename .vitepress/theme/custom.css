@@ -1,0 +1,10 @@
+:root {
+    --vp-c-brand-1: #5fbaff;       /* 主色换成红色 */
+    --vp-c-brand-2: #5fbaff;       /* hover色 */
+    --vp-c-brand-3: #5fbaff;       /* 背景色 */
+}
+
+/* 关闭侧边栏高亮选中 */
+.VPSidebar {
+    user-select: none !important;
+}
