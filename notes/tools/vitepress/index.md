@@ -138,9 +138,9 @@ sidebar: [
 ]
 ```
 
-### 页面导航子标题显示
+### 页面目录子标题显示
 
-**让页面导航显示二级标题以下的标题**。在config.mjs文件里给themeConfig加上outline的参数。
+**让页面目录显示二级标题以下的标题**。在config.mjs文件里给themeConfig加上outline的参数。
 
 ```js
 themeConfig: {
@@ -160,6 +160,8 @@ themeConfig: {
 ## 语法规则
 
 ### 路径
+
+路径结尾有 / 代表文件夹，结尾没有 / 代表文件。
 
 - 文件路径 = URL 路径。
 ```

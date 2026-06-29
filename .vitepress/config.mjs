@@ -46,7 +46,8 @@ export default defineConfig({
           link: '/notes/tools/',
           collapsed: true,
           items: [
-            { text: 'Vitepress', link: '/notes/tools/vitepress/' }
+            { text: 'Vitepress', link: '/notes/tools/vitepress/' },
+            { text: 'Git', link: '/notes/tools/git/'}
           ]
         }
       ],
