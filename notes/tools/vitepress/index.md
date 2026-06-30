@@ -8,7 +8,7 @@ VitePress 是 Vue 团队出品的[静态站点生成器](https://vitepress.dev/z
 
 ## 部署
 
-### 前置
+1. 前置
 
 - Node.js 20 及以上版本。
 - 命令行安装。
@@ -17,7 +17,7 @@ VitePress 是 Vue 团队出品的[静态站点生成器](https://vitepress.dev/z
 npm add -D vitepress@next
 ```
 
-### 安装向导
+2. 安装向导
 
 ```bash
 ┌  Welcome to VitePress!
@@ -60,7 +60,7 @@ npm add -D vitepress@next
 └  Done! Now run npm run dev and start writing.
 ```
 
-### 运行
+3. 运行
 
 ```bash
 npm run dev
@@ -188,4 +188,89 @@ guide/hello.md    →  /guide/hello
 
 ### 代码块标注
 
-[详情查看](/notes/languages/javascript/shiki)
+VitePress 使用 Shiki 作为语法高亮引擎，支持丰富的代码块标注。不同语言的标注写法可能有略微不同，不影响使用。
+
+1. 基础：语言标识
+
+```
+    ```js   //声明该代码块使用js语法高亮
+    ```
+```
+
+2. 高亮指定行 {行号}
+
+```
+    ```js{2,4}           // 高亮第 2 行和第 4 行
+    function foo() {
+        console.log('hi')    // ← 高亮
+        return 1
+        console.log('bye')   // ← 高亮
+    }
+    ```
+
+    也支持行范围：
+    ```js{2-4}          // 高亮第 2 到 4 行
+    ```js{1,3-5,7}     // 混合写法
+```
+
+3. 显示行号 :line-numbers
+
+```
+    ```js:line-numbers
+    const a = 1
+    const b = 2
+    const c = 3
+    ```
+```
+
+4. 代码组（多 Tab 切换）
+
+```
+    ::: code-group
+    ```js [foo.js]
+    const a = 1
+    ```
+
+    ```ts [bar.ts]
+    const a: number = 1
+    ```
+
+    ```py [baz.py]
+    a = 1
+    ```
+    :::
+
+    会渲染成可切换的标签页。
+```
+
+5. 聚焦行（其余变暗）// [!code focus]
+
+```
+    ```js
+    const a = 1          // [!code focus]
+    const b = 2
+    const c = 3          // [!code focus]
+    ```
+
+    a 和 c 行高亮，其余行变暗。
+```
+
+6. Diff 着色 // [!code ++] / // [!code --]
+
+```
+    ```js
+    const a = 1
+    const b = 2          // [!code --]    ← 红色，表示删除
+    const b = 42         // [!code ++]    ← 绿色，表示新增
+    const c = 3
+    ```
+```
+
+7. 警告 / 错误标注 // [!code warning] / // [!code error]
+
+```
+    ```js
+    const x = 1          // [!code warning]    ← 黄色背景
+    const y = null       // [!code error]      ← 红色背景
+    ```
+```

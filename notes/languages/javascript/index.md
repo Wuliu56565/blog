@@ -111,3 +111,92 @@ add.method = function (){   // 给函数挂方法
 }
 add.method()
 ```
+
+## 内置对象
+
+JS 引擎自带、全局可直接使用、预置好的一批工具/构造器。理论上也能挂载值和方法，但不建议，会造成全局污染。
+
+### 内置对象的种类
+
+```text
+内置对象分成两类用法：
+
+1. 当成工具对象直接用（静态方法）
+Math.abs(-5);          // Math 本身就拿来用，不 new
+JSON.parse('{}');      // JSON 本身就拿来用，不 new
+
+2. 当成"模具"来创建实例（构造函数）
+
+new Date();            // new 出一个日期实例
+new Map();             // new 出一个 Map 实例
+new Promise(fn);       // new 出一个 Promise
+```
+
+### 内置对象与数据类型的区别
+
+数据类型回答"这个值是什么"，内置对象回答"我能用什么现成的工具/构造器"。
+
+```text
+原始类型 string  ≠  内置对象 String
+原始类型 number  ≠  内置对象 Number
+原始类型 boolean ≠  内置对象 Boolean
+```
+
+```
+最容易搞混的点：原始值也能"调方法"
+"hello".toUpperCase();  // "HELLO"
+(42).toString();        // "42"
+
+你并没有 new String("hello")，"hello" 是一个原始值（数据类型 string），但它却能调用
+方法。这是因为 JS引擎临时帮你做了"自动装箱"：
+
+  "hello".toUpperCase()
+    ↓ 引擎内部
+    new String("hello").toUpperCase()  // 临时造个包装对象
+    ↓ 用完就丢
+    "HELLO"  // 返回的是新的原始值
+```
+
+### Date
+
+Date 是一个函数对象（function object）。它首先是一个函数，同时因为它是对象，所以身上可以挂属性和方法。
+
+```
+Date = function() { ... }     ← 函数本身
+        .now()                 ← 挂在 Date 自身的静态方法
+        .parse()               ← 挂在 Date 自身的静态方法
+        .UTC()                 ← 挂在 Date 自身的静态方法
+        .prototype.getHours()  ← 挂在原型上，供 new 出来的实例调用
+        .prototype.getDate()   ← 同上
+        ...
+```
+
+### 构造函数
+
+几种易混淆的写法：
+
+- 普通函数调用
+
+```js
+const a = Date()
+console.log(a);          // "Wed Jun 30 2026 15:30:45 GMT+0800 (中国标准时间)"
+console.log(typeof a);   // "string"  ← 注意！是字符串，不是对象
+```
+
+- 构造函数调用
+
+```js
+const a = new Date()
+console.log(a);          // 2026-06-30T08:15:30.456Z
+console.log(typeof a);   // "object"
+console.log(a.getFullYear());  // 2026  ← 可以调用 Date.prototype 上的方法
+```
+
+- 把函数本身赋给 a
+
+```js
+const a = Date
+console.log(typeof a);   // "function"
+console.log(a === Date); // true
+// 因为本身就是Date函数，所以在使用实例方法时还是要先new
+```

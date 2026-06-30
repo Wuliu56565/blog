@@ -4,3 +4,12 @@ dist/
 .vitepress/cache/
 .DS_Store
 *.log
+
+# 敏感文件 / Key
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+credentials.json

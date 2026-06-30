@@ -21,11 +21,7 @@ export default defineConfig({
           items: [
             {
               text: 'Javascript (ES6)',
-              link: '/notes/languages/javascript/',
-              collapsed: true,
-              items: [
-                { text: 'Shiki库', link: '/notes/languages/javascript/shiki' },
-              ]                
+              link: '/notes/languages/javascript/'             
             },
             {
               text: 'Python',
